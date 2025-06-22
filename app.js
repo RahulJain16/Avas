@@ -25,7 +25,7 @@ app.get("/",(req,res) => {
 
 app.get("/listings", async (req,res) => {
     const allListings = await Listing.find({});
-    res.render(allListings);
+    res.render("index.ejs",allListings);
 })
 
 /*app.get("/testListing", async (req,res) => {
