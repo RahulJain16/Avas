@@ -1,7 +1,9 @@
 const express =require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Listing = require("./models/listing.js"); 
+const Listing = require("./models/listing.js");
+const initdata = require("./data.js");
+
 
 const MONGO_URL ="mongodb://127.0.0.1:27017/wanderlust";
 
@@ -21,7 +23,12 @@ app.get("/",(req,res) => {
     res.send("hi i am root");
 });
 
-app.get("/testListing", async (req,res) => {
+app.get("/listings", async (req,res) => {
+    const allListings = await Listing.find({});
+    res.render(allListings);
+})
+
+/*app.get("/testListing", async (req,res) => {
     let sampleListing = new Listing({
         title: "My New Villa",
         description: "By the beach",
@@ -34,7 +41,7 @@ app.get("/testListing", async (req,res) => {
     console.log("sample was saved");
     res.send("successful testing");
 });
-
+*/
 app.listen(8080,() =>{
     console.log("server is listening");
 });
