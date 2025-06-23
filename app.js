@@ -5,6 +5,8 @@ const Listing = require("./models/listing.js");
 const initdata = require("./init/data.js");
 const path = require("path");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
+
 
 
 const MONGO_URL ="mongodb://127.0.0.1:27017/wanderlust";
