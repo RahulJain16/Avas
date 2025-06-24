@@ -58,6 +58,8 @@ body{
     justify-content: center;
     align-items: space-evenly;
 }
+
+/* New Page */
 .add-btn{
     background-color:#fe424d !important; 
     border:none !important;
