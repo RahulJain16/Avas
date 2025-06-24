@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderLust</title>
-</head>
+<% layout('layouts/boilerplate') %>
 <body>
     <h3>Create a New Listing </h3>
     <form method="POST" action="/listings">
-        <div>
+        <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input name="listingobj[title]" 
         placeholder="enter title" 
@@ -16,41 +10,41 @@
         class="form-control"
         />
         </div>
-        <br>
-        <br>
-        <div>
+        
+        
+        <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea name="listingobj[description]" 
             class="form-control"
             ></textarea>
         </div>
-        <br>
-        <br>
-        <div>
+        
+        
+        <div class="mb-3">
             <label for="image" class="form-label">Image Link</label>
             <input name="listingobj[image]" placeholder="enter image URL/Link" type="text" class="form-control">
         </div>
-        <br>
-        <br>
-        <div>
+        
+        
+        <div class="mb-3">
             <label for="price" class="form-label">Price</label>
             <input name="listingobj[price]" placeholder="enter price" type="number" class="form-control">
         </div>
-        <br>
-        <br>
-        <div>
+        
+        
+        <div class="mb-3">
             <label for="country" class="form-label">Country</label>
             <input name="listingobj[country]" placeholder="enter country" type="text" class="form-control">
         </div>
-        <br>
-        <br>
-        <div>           
+        
+        
+        <div class="mb-3">           
             <label for="location" class="form-label">Location</label>
             <input name="listingobj[location]" placeholder="enter location" type="text" class="form-control">
         </div>
-        <br>
-        <br>
-        <button>ADD</button>
+        
+    
+        <button class="btn btn-dark">ADD</button>
     </form>
 </body>
 </html>
