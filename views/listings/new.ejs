@@ -8,22 +8,46 @@
 <body>
     <h3>Create a New Listing </h3>
     <form method="POST" action="/listings">
-        <input name="listingobj[title]" placeholder="enter title" type="text">
+        <div>
+        <label for="title" class="form-label">Title</label>
+        <input name="listingobj[title]" 
+        placeholder="enter title" 
+        type="text"
+        class="form-control"
+        />
+        </div>
         <br>
         <br>
-        <textarea name="listingobj[description]" placeholder="enter description"></textarea>
+        <div>
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listingobj[description]" 
+            class="form-control"
+            ></textarea>
+        </div>
         <br>
         <br>
-        <input name="listingobj[image]" placeholder="enter image URL/Link" type="text">
+        <div>
+            <label for="image" class="form-label">Image Link</label>
+            <input name="listingobj[image]" placeholder="enter image URL/Link" type="text" class="form-control">
+        </div>
         <br>
         <br>
-        <input name="listingobj[price]" placeholder="enter price" type="number">
+        <div>
+            <label for="price" class="form-label">Price</label>
+            <input name="listingobj[price]" placeholder="enter price" type="number" class="form-control">
+        </div>
         <br>
         <br>
-        <input name="listingobj[country]" placeholder="enter country" type="text">
+        <div>
+            <label for="country" class="form-label">Country</label>
+            <input name="listingobj[country]" placeholder="enter country" type="text" class="form-control">
+        </div>
         <br>
         <br>
-        <input name="listingobj[location]" placeholder="enter location" type="text">
+        <div>           
+            <label for="location" class="form-label">Location</label>
+            <input name="listingobj[location]" placeholder="enter location" type="text" class="form-control">
+        </div>
         <br>
         <br>
         <button>ADD</button>
