@@ -3,9 +3,9 @@
  <!----  <form method="GET" action="/listings/new">
         <button>Create New Listings</button>
     </form> -->
-<div class="row">
+<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
     <% for(let listing of allListings){ %>
- <div class="card" style="width: 20rem;">
+ <div class="card col" style="width: 20rem;">
   <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image">
   <div class="card-body">
     <p class="card-text">
