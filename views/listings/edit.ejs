@@ -7,13 +7,20 @@
 </head>
 <body>
     <form method="POST" action="/listings/<%=listing._id %>?_method=PUT">
-        <input name="listing[title]" value="<%= listing.title %>" type="text">
-        <br>
-        <br>
-        <textarea name="listing[description]"  ><%= listing.description%></textarea>
-        <br>
-        <br>
-        <input name="listing[image]"  value="<%= listing.image %>" type="text">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input name="listing[title]" value="<%= listing.title %>" type="text" class="form-contro">
+            </div>
+        
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listing[description]"  ><%= listing.description%></textarea>
+        </div>
+
+                
+        <div class="mb-3">           
+            <label for="image" class="form-label">Image Link</label>
+            <input name="listing[image]"  value="<%= listing.image %>" type="text" class="form-control">
         <br>
         <br>
         <input name="listing[price]" value="<%=listing.price %>" type="number">
