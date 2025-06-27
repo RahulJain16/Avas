@@ -98,3 +98,9 @@ font-weight: 400 !important;
     opacity: 0.2;
     background-color: white;
 }
+
+/* Edit page */
+.edit-btn{
+    background-color:#fe424d !important; 
+    border:none !important;
+}
