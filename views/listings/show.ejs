@@ -18,9 +18,11 @@
             </div>             
         </div>
         <br>
-        <a href="/listings/<%= listing.id %>/edit">Edit this list</a>
+        <a href="/listings/<%= listing.id %>/edit" class="btn">Edit this list</a>
+        <br>
+        <br>
         <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE">
-            <button>Delete this list</button>
+            <button class="btn btn-dark">Delete this list</button>
         </form>
     </div>
 
