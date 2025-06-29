@@ -7,6 +7,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
+
 
 
 
@@ -99,9 +101,14 @@ app.delete("/listings/:id", async (req,res) =>{
     res.send("successful testing");
 });
 */
+app.all("*",(req,res,next) =>{
+    next(new ExpressError(404,"Page not found"));
+
+})
 
 app.use((err,req,res,next) => {
-    res.send("something went wrong");
+    let{statusCode,message}=err;
+    res.status(statusCode).send(message);
 })
 app.listen(8080,() =>{
     console.log("server is listening");
