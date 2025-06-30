@@ -67,10 +67,22 @@ app.get("/listings/:id",wrapAsync(async (req,res) =>{
 
 //Create Route
 app.post("/listings", wrapAsync(async (req,res) => {
+        console.log(req.body); // 👈 Add this to inspect what is received
+
     if(!req.body.listing){
         throw new ExpressError(400,"Send valid data for listing");
     }
-    const newListing = new Listing(req.body.listingobj);
+    const newListing = new Listing(req.body.listing);
+    if(!newListing.title){
+        throw new ExpressError(400,"Title is missing");
+    }
+    if(!newListing.description){
+        throw new ExpressError(400,"Description is missing");
+    }
+    if(!newListing.location){
+        throw new ExpressError(400,"Location is missing");
+    }
+
     await newListing.save();
     res.redirect("/listings")
 })
@@ -78,11 +90,11 @@ app.post("/listings", wrapAsync(async (req,res) => {
 
 //Edit Route
 app.get("/listings/:id/edit", wrapAsync(async (req,res) => {
-    if(!req.body.listing){
-        throw new ExpressError(400,"Send valid data for listing");
-    }
     let {id} = req.params;
     const listing = await Listing.findById(id);
+    if(!listing){
+        throw new ExpressError(400,"Send valid data for listing");
+    }
     res.render("listings/edit.ejs",{listing});
 })
 );
