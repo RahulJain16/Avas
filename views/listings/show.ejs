@@ -6,7 +6,9 @@
 
         <div class="card col-6 offset-3 show-card">
             <img
-               src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image" style="height:20rem"/>
+               src="<%= listing.image.url %>" 
+               class="card-img-top show-img" 
+               alt="listing_image"/>
             <div class="card-body">
                 <p class="card-text">
                        <%= listing.description %> <br>
@@ -16,7 +18,6 @@
                     </p>
             </div>             
         </div>
-   </div>
 
     <div class="btns">
         <a href="/listings/<%= listing.id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
@@ -24,6 +25,23 @@
         <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE">
             <button class="btn btn-dark offset-5">Delete</button>
         </form>
+    </div>
+
+    <div class="col-8 offset-3">
+        <hr>
+        <h4>Leave a Review</h4>
+        <form>
+            <div>
+                <label for="rating">Rating</label>
+                <input type="range" min="1" max="5" id="rating" name="review[rating]">
+            </div>
+            <div>
+                <label for="comment">Comment</label>
+                <textarea name="review[comment]" id="comment" cols="38" rows="18"></textarea>
+            </div>
+            <button>Submit</button>
+        </form>
+    </div>
     </div>
     
 
