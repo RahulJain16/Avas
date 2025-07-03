@@ -9,6 +9,7 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema} = require("./schema.js");
+const Review = require("./models/listing.js");
 
 
 
@@ -112,6 +113,12 @@ app.delete("/listings/:id", wrapAsync(async (req,res) =>{
     res.redirect("/listings");
 })
 );
+
+//Reviews
+//POST Route
+app.post("/listings/:id/reviews", async(req,res) => {
+
+})
 
 /*app.get("/testListing", async (req,res) => {
     let sampleListing = new Listing({
