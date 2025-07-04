@@ -47,11 +47,11 @@
         <p>All Reviews</p>
         <div class="row"></div>
             <% for( review of listing.reviews) { %>
-                <div class="card col-6 mb-3">
+                <div class="card col-5 ms-3 mb-3">
                     <div class="card-body">
                         <h5 class="card-title">jane doe</h5>
                         <p class="card-text"><%= review.comment %></p>
-                        <p class="cadr-text"><%= review.rating %></p>
+                        <p class="cadr-text"><%= review.rating %> stars</p>
                     </div>
                 </div>
                 <%  } %>
