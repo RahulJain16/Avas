@@ -45,7 +45,11 @@
         <hr>
 
         <h4>All Reviews</h4>
-        <p><%= listing.reviews %></p>
+        <ul>
+            <% for(review of listing.reviews) { %>
+                <li> <%= review.comment %>, <%= review.rating %></li>
+                <%  } %>
+        </ul>
     </div>
     </div>
     
