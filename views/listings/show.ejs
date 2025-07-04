@@ -44,10 +44,12 @@
         </form>
         <hr>
 
-        <h4>All Reviews</h4>
+        <p>All Reviews</p>
         <ul>
             <% for(review of listing.reviews) { %>
-                <li> <%= review.comment %>, <%= review.rating %></li>
+                <div>
+                     <%= review.comment %>, <%= review.rating %>
+                </div>
                 <%  } %>
         </ul>
     </div>
