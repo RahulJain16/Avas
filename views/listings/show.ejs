@@ -46,12 +46,12 @@
 
         <p>All Reviews</p>
         <ul>
-            <% for(review of listing.reviews) { %>
+            <% for( review of listing.reviews) { %>
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">jane doe</h5>
                         <p class="card-text"><%= review.comment %></p>
-                        <p class="cadr-text"><%= review rating %></p>
+                        <p class="cadr-text"><%= review.rating %></p>
                     </div>
                 </div>
                 <%  } %>
