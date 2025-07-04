@@ -45,9 +45,9 @@
         <hr>
 
         <p>All Reviews</p>
-        <ul>
+        <div class="row"></div>
             <% for( review of listing.reviews) { %>
-                <div class="card">
+                <div class="card col-6 mb-3">
                     <div class="card-body">
                         <h5 class="card-title">jane doe</h5>
                         <p class="card-text"><%= review.comment %></p>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <%  } %>
-        </ul>
+            </div>
     </div>
     </div>
     
