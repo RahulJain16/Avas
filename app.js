@@ -11,7 +11,7 @@ const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema, reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
 
-const listings = require("./routers/listing.js");
+const session = require("express-session");
 
 
 
@@ -36,10 +36,13 @@ app.use(express.urlencoded({extended : true}));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname,"/public")));
 
-app.use((req, res, next) => {
-    console.log("[REQUEST URL]", req.method, req.url);
-    next();
-});
+const sessionOptions = {
+    secret: "mysupersecretcode",
+    resave: false,
+    savedUnitialized: true
+};
+
+
 
 
 
@@ -68,20 +71,20 @@ const validateReview = (req,res,next) => {
 };
 
 //Index Route
-router.get("/listings", wrapAsync(async (req,res) => {
+app.get("/listings", wrapAsync(async (req,res) => {
     const allListings = await Listing.find({});
     res.render("listings/index.ejs",{allListings});
 })
 );
 
 //New Route
-router.get("/listings/new", (req,res) =>{
+app.get("/listings/new", (req,res) =>{
     res.render("listings/new.ejs");
 });
 
 
 //SHOW ROUTE
-router.get("/listings/:id",wrapAsync(async (req,res) =>{
+app.get("/listings/:id",wrapAsync(async (req,res) =>{
     let{id} = req.params;
     const listing = await Listing.findById(id).populate("reviews");
     res.render("listings/show.ejs",{ listing });
@@ -89,7 +92,7 @@ router.get("/listings/:id",wrapAsync(async (req,res) =>{
 );
 
 //Create Route
-router.post("/listings", validateListing, wrapAsync(async (req,res) => {
+app.post("/listings", validateListing, wrapAsync(async (req,res) => {
     const newListing = new Listing(req.body.listing);   
     await newListing.save();
     res.redirect("/listings")
@@ -97,7 +100,7 @@ router.post("/listings", validateListing, wrapAsync(async (req,res) => {
 );
 
 //Edit Route
-router.get("/listings/:id/edit", wrapAsync(async (req,res) => {
+app.get("/listings/:id/edit", wrapAsync(async (req,res) => {
     let {id} = req.params;
     const listing = await Listing.findById(id);
     if(!listing){
@@ -108,16 +111,16 @@ router.get("/listings/:id/edit", wrapAsync(async (req,res) => {
 );
 
 //Update Route
-router.put("/listings/:id", validateListing, wrapAsync(async (req,res) => {
-    const { id } = req.params;
+app.put("/listings/:id", validateListing, wrapAsync(async (req,res) => {
+    let { id } = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect("/listings");
 })
 );
 
 //Delete Route
-router.delete("/listings/:id", wrapAsync(async (req,res) =>{
-    const { id } = req.params;
+app.delete("/listings/:id", wrapAsync(async (req,res) => {
+    let { id } = req.params;
     let listing=await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
 })
@@ -151,20 +154,7 @@ app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req,res) => {
 })
 );
 
-/*app.get("/testListing", async (req,res) => {
-    let sampleListing = new Listing({
-        title: "My New Villa",
-        description: "By the beach",
-        price: 1200,
-        location: "Calangute, Goa",
-        country: "India",
-    });
-    
-    await sampleListing.save();
-    console.log("sample was saved");
-    res.send("successful testing");
-});
-*/
+
 app.use((req,res,next) => {
     next(new ExpressError(404,"Page not found"));
 });
