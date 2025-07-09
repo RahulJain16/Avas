@@ -12,14 +12,6 @@ const {listingSchema, reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
 const session = require("express-session");
 
-const sessionOptions = {
-    secret: "mysupersecretcode";
-    resave: false,
-    savedUnitialized: true,
-}
-
-app.use(session(sessionOptions));
-
 
 
 const MONGO_URL ="mongodb://127.0.0.1:27017/wanderlust";
@@ -46,11 +38,11 @@ app.use(express.static(path.join(__dirname,"/public")));
 const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
-    savedUnitialized: true
+    saveUnitialized: true,
 };
 
 
-
+app.use(session(sessionOptions));
 
 
 app.get("/",(req,res) => {
