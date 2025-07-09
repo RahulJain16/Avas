@@ -10,8 +10,15 @@ const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema, reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
-
 const session = require("express-session");
+
+const sessionOptions = {
+    secret: "mysupersecretcode";
+    resave: false,
+    savedUnitialized: true,
+}
+
+app.use(session(sessionOptions));
 
 
 
