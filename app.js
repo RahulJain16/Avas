@@ -125,6 +125,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req,res) => {
 app.put("/listings/:id", validateListing, wrapAsync(async (req,res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
+    req.flash("success","Listing Updated");
     res.redirect("/listings");
 })
 );
@@ -151,7 +152,6 @@ app.post("/listings/:id/reviews", validateReview, wrapAsync (async(req,res) => {
     await newReview.save();
     await listing.save();
     req.flash("success","New Review created");
-
     res.redirect(`/listings/${listing._id}`)
 })
 );
