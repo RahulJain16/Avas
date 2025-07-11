@@ -195,7 +195,11 @@ app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req,res) => {
 );
 
 
+//User signup
+app.get("/signup", (req, res) => {
+    res.render("users/signup.ejs");
 
+});
 
 app.use((req,res,next) => {
     next(new ExpressError(404,"Page not found"));
