@@ -218,7 +218,7 @@ app.post("/signup", wrapAsync(async(req, res) => {
 
 //User login
 app.get("/login", (req,res) => {
-    res.render()
+    res.render("users/login.ejs");
 })
 
 app.use((req,res,next) => {
