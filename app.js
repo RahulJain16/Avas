@@ -221,6 +221,11 @@ app.get("/login", (req,res) => {
     res.render("users/login.ejs");
 })
 
+app.post("/login", passport.authenticate("local", {failureRedirect: "/login", failureFlash:true,}) async(req,res) => {
+    res.send("Welocome to Wanderlust! You are logged in!");
+})
+
+
 app.use((req,res,next) => {
     next(new ExpressError(404,"Page not found"));
 });
