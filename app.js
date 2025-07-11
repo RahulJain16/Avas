@@ -11,6 +11,7 @@ const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema, reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 
 
@@ -38,7 +39,7 @@ app.use(express.static(path.join(__dirname,"/public")));
 const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
-    saveUnitialized: true,
+    saveUninitialized: true,
     cookie: {
         expire: Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -46,13 +47,18 @@ const sessionOptions = {
     },
 };
 
-
-app.use(session(sessionOptions));
-
-
 app.get("/",(req,res) => {
     res.send("hi i am root");
 });
+
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next) => {
+    res.locals.success = req.flash("success");
+    next();
+})
 
 const validateListing = (req,res,next) => {
     let {error} = listingSchema.validate(req.body);
@@ -99,6 +105,7 @@ app.get("/listings/:id",wrapAsync(async (req,res) =>{
 app.post("/listings", validateListing, wrapAsync(async (req,res) => {
     const newListing = new Listing(req.body.listing);   
     await newListing.save();
+    req.flash("success","new listing created");
     res.redirect("/listings")
 })
 );
