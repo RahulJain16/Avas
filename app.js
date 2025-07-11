@@ -222,7 +222,8 @@ app.get("/login", (req,res) => {
 })
 
 app.post("/login", passport.authenticate("local", {failureRedirect: "/login", failureFlash:true,}), async(req,res) => {
-    res.send("Welocome to Wanderlust! You are logged in!");
+    req.flash("success","Welocome back to Wanderlust! You are logged in!");
+    res.redirect("/listings");
 })
 
 
