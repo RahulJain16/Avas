@@ -71,7 +71,7 @@ app.use((req,res,next) => {
     res.locals.error = req.flash("error");
     next();
 });
-
+/*
 app.get("/demouser", async (req,res) => {
     let fakeUser = new User({
         email: "student@gmail.com",
@@ -81,6 +81,7 @@ app.get("/demouser", async (req,res) => {
     let registerUser = await User.register(fakeUser, "helloworld");
     res.send(registerUser);
 });
+*/
 
 const validateListing = (req,res,next) => {
     let {error} = listingSchema.validate(req.body);
@@ -200,6 +201,25 @@ app.get("/signup", (req, res) => {
     res.render("users/signup.ejs");
 
 });
+
+app.post("/signup", wrapAsync(async(req, res) => {
+    try {
+    let {username, email, password} = req.body;
+    const newUser = new User({email, username});
+    const registeredUser = await User.register(newUser, password);
+    console.log(registeredUser);
+    res.redirect("/listings");
+    } catch(e) {
+        req.flash("error",e.message);
+        res.redirect("/signup");
+    }
+}));
+
+
+//User login
+app.get("/login", (req,res) => {
+    res.render()
+})
 
 app.use((req,res,next) => {
     next(new ExpressError(404,"Page not found"));
