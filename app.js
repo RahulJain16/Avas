@@ -57,6 +57,7 @@ app.use(flash());
 
 app.use((req,res,next) => {
     res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
     next();
 })
 
@@ -97,6 +98,10 @@ app.get("/listings/new", (req,res) =>{
 app.get("/listings/:id",wrapAsync(async (req,res) =>{
     let{id} = req.params;
     const listing = await Listing.findById(id).populate("reviews");
+    if(!listing){
+        req.flash("error","listing you requested does not exist");
+        res.redirect("/listings");
+    }
     res.render("listings/show.ejs",{ listing });
 })
 );
