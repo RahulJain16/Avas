@@ -131,7 +131,7 @@ app.get("/listings/:id",wrapAsync(async (req,res) =>{
 );
 
 //Create Route
-app.post("/listings", validateListing, wrapAsync(async (req,res) => {
+app.post("/listings", isLoggedIn, validateListing, wrapAsync(async (req,res) => {
     const newListing = new Listing(req.body.listing);   
     await newListing.save();
     req.flash("success","new listing created");
@@ -227,6 +227,20 @@ app.post("/login", passport.authenticate("local", {failureRedirect: "/login", fa
     req.flash("success","Welocome back to Wanderlust! You are logged in!");
     res.redirect("/listings");
 })
+
+
+//User logout
+app.get("/logout", (req, res, next) => {
+    req.logout((err) =>{
+        if(err) {
+            return next(err);
+        }
+        req.flash("success", "you are logged out!");
+        res.redirect("/listings");
+    })
+})
+
+
 
 
 app.use((req,res,next) => {
