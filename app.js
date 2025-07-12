@@ -15,6 +15,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const {isLoggedIn} = require("../middleware.js");
+
 
 
 
@@ -111,11 +113,7 @@ app.get("/listings", wrapAsync(async (req,res) => {
 );
 
 //New Route
-app.get("/listings/new", (req,res) =>{
-    if(!req.isAuthenticated()) {
-        req.flash("error", "you must be logged in to create listing!");
-        return res.redirect("/login");
-    }
+app.get("/listings/new", isLoggedIn, (req,res) =>{
     res.render("listings/new.ejs");
 });
 
