@@ -15,7 +15,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-const {isLoggedIn} = require("../middleware.js");
+const {isLoggedIn} = require("./middleware.js");
 
 
 
@@ -140,7 +140,7 @@ app.post("/listings", validateListing, wrapAsync(async (req,res) => {
 );
 
 //Edit Route
-app.get("/listings/:id/edit", wrapAsync(async (req,res) => {
+app.get("/listings/:id/edit", isLoggedIn, wrapAsync(async (req,res) => {
     let {id} = req.params;
     const listing = await Listing.findById(id);
     if(!listing){
@@ -151,7 +151,7 @@ app.get("/listings/:id/edit", wrapAsync(async (req,res) => {
 );
 
 //Update Route
-app.put("/listings/:id", validateListing, wrapAsync(async (req,res) => {
+app.put("/listings/:id",isLoggedIn, validateListing, wrapAsync(async (req,res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     req.flash("success","Listing Updated");
@@ -160,7 +160,7 @@ app.put("/listings/:id", validateListing, wrapAsync(async (req,res) => {
 );
 
 //Delete Route
-app.delete("/listings/:id", wrapAsync(async (req,res) => {
+app.delete("/listings/:id", isLoggedIn, wrapAsync(async (req,res) => {
     let { id } = req.params;
     let listing=await Listing.findByIdAndDelete(id);
     req.flash("success","Listing Deleted");
