@@ -203,7 +203,6 @@ app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req,res) => {
 //User signup
 app.get("/signup", (req, res) => {
     res.render("users/signup.ejs");
-
 });
 
 app.post("/signup", wrapAsync(async(req, res) => {
@@ -263,4 +262,4 @@ app.use((err,req,res,next) => {
 
 app.listen(8080,() =>{
     console.log("server is listening");
-})
+});
