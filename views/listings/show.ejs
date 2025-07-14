@@ -10,12 +10,11 @@
                class="card-img-top show-img" 
                alt="listing_image"/>
             <div class="card-body">
-                <p class="card-text">
-                       <%= listing.description %> <br>
-                       &#8377; <%= (listing.price != null && !isNaN(listing.price)) ? Number(listing.price).toLocaleString("en-IN") : "N/A" %><br>
-                       <%= listing.location %><br>
-                       <%= listing.country %><br>
-                    </p>
+                <p class="card-text">Owned By <i><%= listing.owner ? listing.owner.username : "Unknown Owner" %></i></p>
+                <p> <%= listing.description %> </p>
+                <p> &#8377; <%= (listing.price != null && !isNaN(listing.price)) ? Number(listing.price).toLocaleString("en-IN") : "N/A" %></p>
+                <p> <%= listing.location %></p>
+                <p> <%= listing.country %></p>
             </div>             
         </div>
 
