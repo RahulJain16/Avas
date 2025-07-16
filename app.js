@@ -133,6 +133,9 @@ app.get("/listings/:id",wrapAsync(async (req,res) =>{
 
 //Create Route
 app.post("/listings", isLoggedIn, validateListing, wrapAsync(async (req,res) => {
+    if (!req.body.listing) {
+        throw new ExpressError(400, "Send valid data for listing");
+    }
     const newListing = new Listing(req.body.listing);   
     newListing.owner = req.user._id;
     await newListing.save();
@@ -154,6 +157,9 @@ app.get("/listings/:id/edit", isLoggedIn, wrapAsync(async (req,res) => {
 
 //Update Route
 app.put("/listings/:id",isLoggedIn, validateListing, wrapAsync(async (req,res) => {
+    if (!req.body.listing) {
+        throw new ExpressError(400, "Send valid data for listing");
+    }
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     req.flash("success","Listing Updated");
