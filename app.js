@@ -220,7 +220,7 @@ app.post("/signup", wrapAsync(async(req, res) => {
         if(err){
             return next(err);
         }
-        req.flash("success", "Welcome to Wanderlust!");
+        req.flash("success", "Welcome to Wandarlust!");
         res.redirect("/listings");
     });
     } catch(e) {
