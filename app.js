@@ -94,7 +94,7 @@ const validateListing = (req,res,next) => {
     } else {
         next();
     }
-};
+}
 
 const validateReview = (req,res,next) => {
     let {error} = reviewSchema.validate(req.body);
