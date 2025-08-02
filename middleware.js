@@ -12,4 +12,4 @@ module.exports.saveRedirectUrl = (req,res,next) => {
         res.locals.redirectUrl = req.session.redirectUrl;
     }
     next();
-}
+};
